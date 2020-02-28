@@ -1,0 +1,55 @@
+nav {
+    width: 100%;
+    height: 72px;
+    padding: 0 24px;
+    background: #00A0DD;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+    max-width: 830px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.nav-logo {
+    float: left;
+    -webkit-transform-origin-x: 0;
+    transform: scale(0.5);
+}
+
+.nav-items {
+    float: right;
+}
+
+.nav-items .MuiButton-root {
+    line-height: 1.25 !important;
+    color: white;
+}
+
+.nav-items .MuiButton-root:hover {
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-items .MuiButton-outlined {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+nav .MuiIconButton-root {
+    outline: 0;
+}
+
+.user-dropdown {
+    z-index: 2;
+}
+
+.MuiAvatar-circle {
+    border: 2px solid white;
+}
+
+nav .MuiBackdrop-root {
+    z-index: 1;
+}
