@@ -89,17 +89,6 @@ class Add extends Component {
                 <h1>Čauko <span style={{color: '#00A0DD'}}>{this.props.givenName}</span> 👋</h1> 
                 <h3>Začni svoj deň s malým prianím.</h3>
                 <form onSubmit={this.handleSubmit}>
-
-                    <TextField 
-                        id="filled-required" 
-                        label="Meno" 
-                        name="username" 
-                        variant="filled"
-                        value={this.state.username} 
-                        onChange={this.handleChange}
-                    />
-                    
-
                     <TextField
                         required
                         id="standard-multiline-flexible"
