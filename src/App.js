@@ -1,25 +1,26 @@
+// INITIAL
 import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
-import { Container } from "reactstrap";
-import PrivateRoute from "./components/PrivateRoute";
-import Loading from "./components/Loading";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
-import Home from "./views/Home";
-import Profile from "./views/Profile";
-import { useAuth0 } from "./react-auth0-spa";
+
+// ROUTER
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import history from "./utils/history";
+
+// LOADING
+import Loading from "./components/Loading.js";
+
+// DATABASE
+import { useAuth0 } from "./react-auth0-spa";
+
+// IMPORTED COMPONENTS
 import Navigation from './components/Navigation/Navigation';
-import Add from './components/Add/Add';
 
+// PAGES
+import Wish from './pages/Wish.js';
+import Home from './pages/Home.js';
 
-
-// styles
+// STYLES
 import "./App.css";
 
-// fontawesome
-import initFontAwesome from "./utils/initFontAwesome";
-initFontAwesome();
 
 const App = () => {
   
@@ -36,17 +37,29 @@ const App = () => {
       <div className="App">
         <Navigation />
         {!isAuthenticated && (
-        <h1>yoyo</h1>
+        <div>
+
+        </div>
         )}
         {isAuthenticated && (
-        <Add 
-        name={user.name}
-        givenName={user.given_name}/>
+                  <Switch>
+                  <Route path="/domov" component={Home} />
+                  <Route path="/wish" component={Wish} />
+                  <Route path="/prispevky" />
+                </Switch>
         )}
-
       </div>
     </Router>
   );
 };
 
 export default App;
+
+
+
+
+
+        //<Add 
+        //name={user.name}
+        //givenName={user.given_name}/>
+        //)}

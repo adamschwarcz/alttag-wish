@@ -1,0 +1,3 @@
+.time-list::-webkit-scrollbar {
+    display: none;
+}

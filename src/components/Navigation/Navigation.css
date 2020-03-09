@@ -35,7 +35,7 @@ nav {
     z-index: 2;
 }
 
-.MuiAvatar-circle {
+.nav-items .MuiAvatar-circle {
     border: 2px solid white;
 }
 

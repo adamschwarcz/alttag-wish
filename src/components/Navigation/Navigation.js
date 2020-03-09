@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom'
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import ListItem from '@material-ui/core/ListItem';
@@ -21,6 +22,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
 import MenuIcon from '@material-ui/icons/Menu';
+
 
 import './Navigation.css';
 
@@ -79,266 +81,193 @@ const useStyles = makeStyles(theme => ({
 /* ----  ---- ---- ---- ---- ---- ---- ---- ----  */
 
 const Navigation = () => {
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const anchorRef = React.useRef(null);
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const anchorRef = React.useRef(null);
 
-    /* ––––––––– */
-    const [value, setValue] = React.useState(0);
-  
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
-    /* ––––––––– */
-  
-    const handleToggle = () => {
-      setOpen(prevOpen => !prevOpen);
-    };
-  
-    const handleClose = event => {
-      if (anchorRef.current && anchorRef.current.contains(event.target)) {
-        return;
-      }
-  
-      setOpen(false);
-    };
-  
-    function handleListKeyDown(event) {
-      if (event.key === 'Tab') {
-        event.preventDefault();
-        setOpen(false);
-      }
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handleToggle = () => {
+    setOpen(prevOpen => !prevOpen);
+  };
+
+  const handleClose = event => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
     }
-  
-    // return focus to the button when we transitioned from !open -> open
-    const prevOpen = React.useRef(open);
-    React.useEffect(() => {
-      if (prevOpen.current === true && open === false) {
-        anchorRef.current.focus();
-      }
-  
-      prevOpen.current = open;
-    }, [open]);
 
-    const [isOpen, setIsOpen] = useState(false);
-    const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
-    const toggle = () => setIsOpen(!isOpen);
-  
-    const logoutWithRedirect = () =>
-      logout({
-        returnTo: window.location.origin
-      });
-    
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    setOpen(false);
+  };
 
-    const handleClick = event => {
-       setAnchorEl(event.currentTarget);
-    };
-    
-    return (
-        <AppBar style={{backgroundColor: '#00A0DD', padding: '0 24px', boxShadow: 'none'}}>
-                  {!isAuthenticated && (
-                    <div className="nav-items">
-                      <img 
-                        className="nav-logo"
-                        src="https://i.imgur.com/1Z3Wlzb.png" 
-                        alt="AltTag Wish Logo" 
-                      />
-                      
-                      <Button
-                          variant="outlined"
-                          color="white"
-                          onClick={() => loginWithRedirect({})}
-                          >
-                          Prihlásiť sa
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    }
+  }
+
+  // return focus to the button when we transitioned from !open -> open
+  const prevOpen = React.useRef(open);
+  React.useEffect(() => {
+    if (prevOpen.current === true && open === false) {
+      anchorRef.current.focus();
+    }
+
+    prevOpen.current = open;
+  }, [open]);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const toggle = () => setIsOpen(!isOpen);
+
+  const logoutWithRedirect = () =>
+    logout({
+      returnTo: window.location.origin
+    });
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  return (
+
+    <AppBar style={{ backgroundColor: '#00A0DD', padding: '0 24px', boxShadow: 'none' }}>
+      {!isAuthenticated && (
+        <div className="nav-items">
+          <img
+            className="nav-logo"
+            src="https://i.imgur.com/1Z3Wlzb.png"
+            alt="AltTag Wish Logo"
+          />
+
+          <Button
+            variant="outlined"
+            color="white"
+            onClick={() => loginWithRedirect({})}
+          >
+            Prihlásiť sa
                       </Button>
-                    </div>
-                  )}
+        </div>
+      )}
 
-                  {isAuthenticated && (
-                    <div className="nav-items">
-                      <img 
-                        className="nav-logo"
-                        src="https://i.imgur.com/1Z3Wlzb.png" 
-                        alt="AltTag Wish Logo" 
-                      />
+      {isAuthenticated && (
+        <div className="nav-items">
+          <img
+            className="nav-logo"
+            src="https://i.imgur.com/1Z3Wlzb.png"
+            alt="AltTag Wish Logo"
+          />
 
-                      <div className="menu-sm">
-                      <Tooltip title='Otvoriť menu' aria-label="add">
-                      <IconButton
-                        ref={anchorRef}
-                        aria-controls={open ? 'menu-list-fade' : undefined}
-                        aria-haspopup="true"
-                        /* onClick={handleToggle} */
-                        >
-                      <MenuIcon style={{fill: 'white', fontSize: '32px'}}/>
-                      </IconButton>
-                      </Tooltip>
-                      </div>
-                      <img 
-                        className="nav-logo-sm"
-                        src="https://i.imgur.com/1Z3Wlzb.png" 
-                        alt="AltTag Wish Logo" 
-                      />
-                      <div className="tabs">
-                      <Tabs
-                        variant="fullWidth"
-                        inkBarStyle={{background: 'blue'}}
-                        value={value}
-                        onChange={handleChange}
-                        aria-label="nav tabs example"
-                        style={{position: 'relative', right: '42px', height: '72px',}}
-                      >
-                        <LinkTab 
-                          label="Domov" 
-                          href="/drafts" 
-                          {...a11yProps(0)} 
+          <div className="menu-sm">
+            <Tooltip title='Otvoriť menu' aria-label="add">
+              <IconButton
+                ref={anchorRef}
+                aria-controls={open ? 'menu-list-fade' : undefined}
+                aria-haspopup="true"
+              /* onClick={handleToggle} */
+              >
+                <MenuIcon style={{ fill: 'white', fontSize: '32px' }} />
+              </IconButton>
+            </Tooltip>
+          </div>
+          <img
+            className="nav-logo-sm"
+            src="https://i.imgur.com/1Z3Wlzb.png"
+            alt="AltTag Wish Logo"
+          />
+          <div className="tabs">
 
-                          style={{
-                            height: '72px',
-                            color: 'white',
-                            textDecoration: 'none',
-                          }} />
+            <Tabs
+              variant="fullWidth"
+              inkBarStyle={{ background: 'blue' }}
+              value={value}
+              onChange={handleChange}
+              aria-label="nav tabs example"
+              style={{ position: 'relative', right: '42px', height: '72px', }}
+            >
+              
+              <Tab
+                label="Domov" 
+                component={Link} 
+                to="/domov"
 
-                        <LinkTab 
-                          label="Wish" 
-                          href="/trash" 
-                          {...a11yProps(1)} 
-                          style={{
-                            height: '72px',
-                            color: 'white',
-                            textDecoration: 'none',
-                          }} />
+                style={{
+                  height: '72px',
+                  color: 'white',
+                  textDecoration: 'none',
+                }} />
+               
+              <Tab
+                label="Wish" 
+                component={Link} 
+                to="/wish"
 
-                        <LinkTab 
-                          label="Príspevky" 
-                          href="/spam" 
-                          {...a11yProps(2)}
-                          style={{
-                            height: '72px',
-                            color: 'white',
-                            textDecoration: 'none',
-                          }}/>
+                style={{
+                  height: '72px',
+                  color: 'white',
+                  textDecoration: 'none',
+                }} />
 
-                      </Tabs>
-                      </div>
-                      <Tooltip title={user.name} aria-label="add">
-                      <IconButton
-                        ref={anchorRef}
-                        aria-controls={open ? 'menu-list-fade' : undefined}
-                        aria-haspopup="true"
-                        onClick={handleToggle}
-                        >
-                      <Avatar alt="Cindy Baker" src={user.picture} />
-                      </IconButton>
-                      </Tooltip>
-                      <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
-                      </Backdrop>
+              <Tab
+                label="Príspevky"
+                component={Link} 
+                to="/prispevky"
+                
+                style={{
+                  height: '72px',
+                  color: 'white',
+                  textDecoration: 'none',
+                }} />
 
-                      <Popper 
-                        style={{zIndex: '2', width: '200px'}} 
-                        open={open} 
-                        anchorEl={anchorRef.current} 
-                        placement={'bottom-end'}
-                        role={undefined} 
-                        transition disablePortal>
-                        {({ TransitionProps }) => (
-                          <Fade {...TransitionProps} timeout={350}>
-                            <Paper>
-                              <ClickAwayListener onClickAway={handleClose}>
-                                <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                                  <ListItem button onClick={() => logoutWithRedirect()}>
-                                  <ListItemIcon>
-                                      <ExitToAppIcon />
-                                  </ListItemIcon>
-                                  <ListItemText primary="Odhlásiť sa" />
-                                  </ListItem>
-                                </MenuList>
-                              </ClickAwayListener>
-                            </Paper>
-                          </Fade>
-                        )}
-                      </Popper>
-                    </div>
-                  )}
-        </AppBar>
-    )
+            </Tabs>
+          </div>
+          <Tooltip title={user.name} aria-label="add">
+            <IconButton
+              ref={anchorRef}
+              aria-controls={open ? 'menu-list-fade' : undefined}
+              aria-haspopup="true"
+              onClick={handleToggle}
+            >
+              <Avatar alt="Cindy Baker" src={user.picture} />
+            </IconButton>
+          </Tooltip>
+          <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+          </Backdrop>
+
+          <Popper
+            style={{ zIndex: '2', width: '200px' }}
+            open={open}
+            anchorEl={anchorRef.current}
+            placement={'bottom-end'}
+            role={undefined}
+            transition disablePortal>
+            {({ TransitionProps }) => (
+              <Fade {...TransitionProps} timeout={350}>
+                <Paper>
+                  <ClickAwayListener onClickAway={handleClose}>
+                    <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                      <ListItem button onClick={() => logoutWithRedirect()}>
+                        <ListItemIcon>
+                          <ExitToAppIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Odhlásiť sa" />
+                      </ListItem>
+                    </MenuList>
+                  </ClickAwayListener>
+                </Paper>
+              </Fade>
+            )}
+          </Popper>
+        </div>
+      )}
+    </AppBar>
+  )
 }
 
 export default Navigation
-
-/*
-<UncontrolledDropdown nav inNavbar>
-<DropdownToggle nav caret id="profileDropDown">
-    <img
-    src={user.picture}
-    alt="Profile"
-    className="nav-user-profile rounded-circle"
-    width="50"
-    />
-</DropdownToggle>
-<DropdownMenu>
-    <DropdownItem header>{user.name}</DropdownItem>
-    <DropdownItem
-    tag={RouterNavLink}
-    to="/profile"
-    className="dropdown-profile"
-    activeClassName="router-link-exact-active"
-    >
-    <FontAwesomeIcon icon="user" className="mr-3" /> Profile
-    </DropdownItem>
-    <DropdownItem
-    id="qsLogoutBtn"
-    onClick={() => logoutWithRedirect()}
-    >
-    <FontAwesomeIcon icon="power-off" className="mr-3" /> Log
-    out
-    </DropdownItem>
-</DropdownMenu>
-</UncontrolledDropdown>
-*/
-
-/*
-
-<div className="tabs">
-<Tabs
-  variant="fullWidth"
-  value={value}
-  onChange={handleChange}
-  aria-label="nav tabs example"
-  style={{height: '72px'}}
->
-  <LinkTab 
-    label="Page One" 
-    href="/drafts" 
-    {...a11yProps(0)} 
-
-    style={{
-      height: '72px',
-      color: 'white',
-      textDecoration: 'none',
-    }} />
-
-  <LinkTab 
-    label="Page Two" 
-    href="/trash" 
-    {...a11yProps(1)} 
-    style={{
-      height: '72px',
-      color: 'white',
-      textDecoration: 'none',
-    }} />
-
-  <LinkTab 
-    label="Page Three" 
-    href="/spam" 
-    {...a11yProps(2)}
-    style={{
-      height: '72px',
-      color: 'white',
-      textDecoration: 'none',
-    }}/>
-
-</Tabs>
-
-*/

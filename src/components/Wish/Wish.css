@@ -35,7 +35,6 @@ h3 {
     padding: 32px;
     margin-right: 16px;
     background: #FFFFFF;
-    border-top: 8px solid #00A0DD;
 }
 
 .add-item h3 {
@@ -58,16 +57,16 @@ form {
 
 .wish {
     overflow: hidden;
-    padding: 24px;
     margin-bottom: 24px;
     background: #FFFFFF;
-    box-shadow: 0px 3.74322px 1.96466px rgba(0, 0, 0, 0.0196802), 0px 7.86088px 4.31392px rgba(0, 0, 0, 0.0282725), 0px 12.7231px 7.8386px rgba(0, 0, 0, 0.035), 0px 19.2905px 14.6715px rgba(0, 0, 0, 0.0417275), 0px 31.4097px 31.805px rgba(0, 0, 0, 0.0503198), 0px 100px 80px rgba(0, 0, 0, 0.07);
+    
 }
 
 h2 {
     margin: 0;
-    font-size: 20px;
+    font-size: 16px;
     color: #474747;
+    line-height: 24px;
 }
 
 .name {
@@ -75,8 +74,8 @@ h2 {
     justify-content: space-between;
     align-items: center;
     margin-top: 24px;
-    padding-left: 16px;
-    border-left: 1px solid #cac9c9;
+    background: #F9F9F9;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .name .MuiButton-root {
@@ -86,7 +85,11 @@ h2 {
 
 p {
     color: #ADADAD;
-    margin: 0;
+    font-size: 14px;
+}
+
+.name p {
+    margin: 0 12px;
 }
 
 .name .currentName {
@@ -106,7 +109,6 @@ p {
 .MuiButton-containedPrimary {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', 'Arial', sans-serif !important;
     font-weight: 600 !important;
-    background: #00A0DD !important;
 }
 
 .MuiFormControl-root {

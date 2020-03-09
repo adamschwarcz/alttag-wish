@@ -1,9 +1,41 @@
 body {
-  background: #F9F9F9;
+  background: #F8F8F8;
 }
 
 :focus {
   outline: 0;
+}
+
+.left { 
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.maxwidth960 {
+  max-width: 960px;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+/* Wish */
+.Wish {
+  display: flex;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 120px 0 0 0;
+}
+
+.WishForm {
+  float: left;
+}
+
+.WishList {
+  float: right;
 }
 
 .next-steps .fa-link {
