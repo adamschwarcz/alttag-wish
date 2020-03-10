@@ -1,5 +1,5 @@
 import React from 'react'
-import TimeLog from '../components/TimeLog/TimeLog';
+import Widgets from '../components/TimeLog/Widgets';
 import Drawer from '../components/Drawer/Drawer';
 
 
@@ -22,7 +22,7 @@ function Home() {
                 background: '#E2E2E2',
             }}>
             </div>
-            <TimeLog />
+            <Widgets />
     </div>
     )
 }
